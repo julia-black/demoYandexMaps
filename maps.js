@@ -16,6 +16,14 @@ function init() {
     htmlBalloon += '</div>';
     htmlBalloon += '</div>';
 
+    var htmlBalloon1 = '<div class="popup">';
+    htmlBalloon1 += '<img src="circus.jpg" alt="" />';
+    htmlBalloon1 += '<div class="popup-text">';
+    htmlBalloon1 += '<p>Цирк им. Братьев Никитиных</p>';
+    htmlBalloon1 += '<p>Достопримечательность г.Саратова</p>';
+    htmlBalloon1 += '</div>';
+    htmlBalloon1 += '</div>';
+
 
     var placemark = new ymaps.Placemark([51.533970, 46.021121], {
         balloonContent: htmlBalloon,
@@ -29,8 +37,21 @@ function init() {
         balloonShadow: true,
     });
 
+    var placemark1 = new ymaps.Placemark([51.633970, 46.021121], {
+        balloonContent: htmlBalloon1,
+
+    }, {
+        balloonCloseButton: true,
+        iconLayout: 'default#image',
+        iconImageHref: 'http://blog.karmanov.ws/files/APIYaMaps1/min_marker.png',
+        iconImageSize: [40, 51],
+        iconImageOffset: [-20, -47],
+        balloonShadow: true,
+    });
+
     var geoObjectsCollection = new ymaps.GeoObjectCollection();
     geoObjectsCollection.add(placemark);
+    geoObjectsCollection.add(placemark1);
 
     // Добавляем коллекцию геообъектов на карту
     myMap.geoObjects.add(geoObjectsCollection);
@@ -39,6 +60,4 @@ function init() {
     if(geoObjectsCollection.getLength() > 1){
         myMap.setBounds(geoObjectsCollection.getBounds());
     }
-
-
 }

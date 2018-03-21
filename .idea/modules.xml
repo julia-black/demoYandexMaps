@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/YandexMaps.iml" filepath="$PROJECT_DIR$/.idea/YandexMaps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/demoYandexMaps.iml" filepath="$PROJECT_DIR$/.idea/demoYandexMaps.iml" />
     </modules>
   </component>
 </project>
