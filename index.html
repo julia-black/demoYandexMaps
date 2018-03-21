@@ -2,15 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GoodRout</title>
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript">
+    <title>GoodRoute - сервис для активных людей</title>
+    <script src="https://api-maps.yandex.ru/2.1.40/?lang=ru_RU" type="text/javascript">
     </script>
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css" >
     <link href='https://fonts.googleapis.com/css?family=Six+Caps:400' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <h1>Good Rout</h1>
+    <h1>Good Route</h1>
     <p class="description">Сервис для активных людей</p>
+    <button class="add-placemark"><p>Добавить элемент маршрута</p></button>
+    <button class="save-rout"><p>Сохранить маршрут</p></button>
+    <button class="import-rout"><p>Загрузить маршрут</p></button>
+    <button class="import-placemarks"><p>Загрузить интересные места</p></button>
     <div id="map"></div>
     <script src="maps.js" type="text/javascript"> </script>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,400italic,900' rel='stylesheet' type='text/css'>

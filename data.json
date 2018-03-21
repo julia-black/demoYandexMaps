@@ -1,0 +1,37 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.553870, 46.021121
+        ]
+      },
+      "properties": {
+        "balloonContent": "Центр выдачи в Великом Новгороде Адрес: г.Великий Новгород, ул. Большая Санкт-Петербургская, д.39 стр 14, оф.1, СДЭК. Тел. (8162) 22-44-40 Заказ будет доставлен в пункт выдачи через 2-4 рабочих дня. Время работы: с понедельника по пятницу с 9-00 до 18-00.",
+        "hintContent": "Центр выдачи в Великом Новгороде"
+      },
+      "options": {
+        "preset": "islands#violetDotIcon"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.533970, 46.051131
+        ]
+      },
+      "properties": {
+        "balloonContent": "Только курьерская доставка",
+        "hintContent": "Только курьерская доставка"
+      },
+      "options": {
+        "preset": "islands#greenDotIcon"
+      }
+    }
+  ]
+}
