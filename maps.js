@@ -6,9 +6,46 @@ $(document).ready(function () {
     var multiRoute;
     var objectManager;
 
-    function clickSaveRoute() {
-     //   console.log(multiRoute)//;
+    function download(file) {
+        let myFile = new File([file], {'type': 'json'}),
+            link = document.createElement("a"),
+            url = window.URL.createObjectURL(myFile);
+        link.download = "text.json";
+        link.href = url;
+        link.click();
+    }
 
+    function clickSaveRoute() {
+
+        var route = {
+            type: 'FeatureCollection',
+            features: []
+        };
+        for (let i = 0; i < myPlacemarks.length; i++) {
+            route.features.push({
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: [
+                        myPlacemarks[i].geometry.getCoordinates(0), myPlacemarks[i].geometry.getCoordinates(1),
+                    ]
+                },
+                properties: {
+                    balloonContent: '---',
+                    hintContent: '-'
+                },
+                options: {
+                    preset: 'islands#violetDotIcon'
+                }
+            });
+        }
+        if (myPlacemarks.length > 1) {
+            var str = JSON.stringify(route);
+            console.log(str);
+            route = JSON.parse(str);
+            console.log(route);
+        }
+        download(str);
     }
 
     function addNewPlacemark() {
@@ -30,18 +67,18 @@ $(document).ready(function () {
 
                     ymaps.geocode(placemarkCoordinates)
                         .then(function (resAddress) {
-                         //   alert(placemarkCoordinates + ' ' + resAddress.geoObjects.get(0).properties.get('text'));
+                            //   alert(placemarkCoordinates + ' ' + resAddress.geoObjects.get(0).properties.get('text'));
                         });
 
-                    if(myPlacemarks.length > 1) {
-                        if(multiRoute) {
+                    if (myPlacemarks.length > 1) {
+                        if (multiRoute) {
                             myMap.geoObjects.remove(multiRoute);
                         }
                         var placemarks = [];
-                        for(let i = 0; i< myPlacemarks.length; i++){
+                        for (let i = 0; i < myPlacemarks.length; i++) {
                             placemarks.push(myPlacemarks[i].geometry.getCoordinates());
                         }
-                       // alert(placemarks);
+                        // alert(placemarks);
 
                         multiRoute = new ymaps.multiRouter.MultiRoute({
                             referencePoints: placemarks,
@@ -93,13 +130,12 @@ $(document).ready(function () {
             jQuery.getJSON('route.json', function (json) {
                 let geoObjects = ym.geoQuery(json);
                 myPlacemarks = geoObjects._objects;
-                //console.log(myPlacemarks);
-                if(myPlacemarks.length > 1) {
-                    if(multiRoute) {
+                if (myPlacemarks.length > 1) {
+                    if (multiRoute) {
                         myMap.geoObjects.remove(multiRoute);
                     }
                     var placemarks = [];
-                    for(let i = 0; i< myPlacemarks.length; i++){
+                    for (let i = 0; i < myPlacemarks.length; i++) {
                         placemarks.push(myPlacemarks[i].geometry.getCoordinates());
                     }
                     multiRoute = new ymaps.multiRouter.MultiRoute({
@@ -111,22 +147,14 @@ $(document).ready(function () {
                         editorDrawOver: false,
                         wayPointDraggable: false,
                         viaPointDraggable: false,
-                        routeStrokeColor: "000088",
-                        routeActiveStrokeColor: "ff0000",//
+                        routeActivePedestrianSegmentStrokeStyle: "solid",
+                        routeActivePedestrianSegmentStrokeColor: "#00CDCD",
                         pinIconFillColor: "ff0000",
                         balloonContentBodyLayout: ymaps.templateLayoutFactory.createClass('$[properties.humanJamsTime]'),
                         boundsAutoApply: true,
                         zoomMargin: 30
                     });
 
-
-                   // routes.each((route) => {
-                   //     route.getPaths().options.set({
-//
-                   //             // можно выставить настройки графики маршруту
-                  // //             opacity: 0.1
-                   //         });
-                   // });
                     myMap.geoObjects.remove(myPlacemarks);
                     myMap.geoObjects.add(multiRoute);
                     myMap.geoObjects.remove(myPlacemark);
@@ -174,5 +202,10 @@ $(document).ready(function () {
         if (geoObjectsCollection.getLength() > 1) {
             myMap.setBounds(geoObjectsCollection.getBounds());
         }
+
+        var event = {
+            title: "Конференция",
+            date: "сегодня"
+        };
     }
 });
